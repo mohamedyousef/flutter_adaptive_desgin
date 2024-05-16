@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "localeName": "en",
+  "appName": "Predictiva Task",
+  "tryAgainButton": "Try Again",
+  "@APP_MESSAGES": "****************************************************************",
+  "cancelNetworkErrorMessage": "The request was canceled.",
+  "parsingNetworkErrorMessage": "Error parsing response data.",
+  "unauthorisedNetworkErrorMessage": "Unauthorized access.",
+  "forbiddenNetworkErrorMessage": "Access to the resource is forbidden.",
+  "noDataNetworkErrorMessage": "No data available.",
+  "unProcessableNetworkErrorMessage": "The server cannot process the request.",
+  "badConnectionErrorMessage": "Bad network connection.",
+  "serverNetworkErrorMessage": "Server error.",
+  "otherNetworkErrorMessage": "An error occurred. Please try again later.",
+  "uploadingFailedNetworkErrorMessage": "Failed to upload.",
+  "insufficientPermissionsNetworkErrorMessage": "Insufficient permissions to perform this action.",
+  "sometingWentWrong": "Something went wrong.",
+  "noInternet": "It looks like you have no internet connection"
+}
