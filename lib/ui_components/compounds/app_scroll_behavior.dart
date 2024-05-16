@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-
-import '../../app/core_common_libs.dart';
+import 'package:predictiva_task/common_libs.dart';
+import 'package:predictiva_task/app/core_common_libs.dart';
 
 class AppScrollBehavior extends ScrollBehavior {
   @override
@@ -23,6 +22,7 @@ class AppScrollBehavior extends ScrollBehavior {
       controller: details.controller,
       thumbVisibility: PlatformInfo.isDesktopOrWeb,
       thickness: 8,
+      radius: Radius.circular($styles.corners.sm),
       interactive: true,
       child: child,
     );

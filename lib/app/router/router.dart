@@ -20,9 +20,7 @@ final appRouter = GoRouter(
     ShellRoute(
         builder: (context, router, navigator) {
           return AppScaffold(
-            child: OfflineModeViewScreen(
-              child: navigator,
-            ),
+            child: navigator,
           );
         },
         routes: [

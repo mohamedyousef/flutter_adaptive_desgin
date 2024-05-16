@@ -2,9 +2,6 @@
 
 import 'package:predictiva_task/app/core/helper/extensions.dart';
 import 'package:predictiva_task/common_libs.dart';
-
-import 'colors.dart';
-
 export 'colors.dart';
 
 @immutable
@@ -157,11 +154,7 @@ class _Corners {
 }
 
 class _Sizes {
-  double get maxContentWidth1 => 800;
-
-  double get maxContentWidth2 => 600;
-
-  double get maxContentWidth3 => 500;
+  double get maxContentWidth => 1350;
   final Size minAppSize = const Size(380, 650);
 }
 
@@ -242,7 +235,7 @@ abstract class TxtInputStyle {
 abstract class AppButtonStyle {
   AppButtonStyle._();
 
-  static final _buttonShape = MaterialStateProperty.all<RoundedRectangleBorder>(
+  static final _buttonShape = WidgetStateProperty.all<RoundedRectangleBorder>(
     const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
   );
 
@@ -251,7 +244,7 @@ abstract class AppButtonStyle {
   static final _defaultBackgroundColor = $styles.colors.accent1;
   static final _outlineBackgroundColor = $styles.colors.transparent;
 
-  static final _elevation = MaterialStateProperty.all<double>(0);
+  static final _elevation = WidgetStateProperty.all<double>(0);
 
   static final _defaultMinimumHeight = 49.0.scale();
   static final _defaultMinimumWidth = 72.0.scale();
@@ -259,28 +252,28 @@ abstract class AppButtonStyle {
   static final _smallMinimumHeight = 28.0.scale();
   static final _smallMinimumWidth = 56.0.scale();
 
-  static final _defaultMinimumSize = MaterialStateProperty.all<Size>(Size(_defaultMinimumWidth, _defaultMinimumHeight));
-  static final _smallMinimumSize = MaterialStateProperty.all<Size>(Size(_smallMinimumWidth, _smallMinimumHeight));
+  static final _defaultMinimumSize = WidgetStateProperty.all<Size>(Size(_defaultMinimumWidth, _defaultMinimumHeight));
+  static final _smallMinimumSize = WidgetStateProperty.all<Size>(Size(_smallMinimumWidth, _smallMinimumHeight));
 
-  static final _defaultFixedSize = MaterialStateProperty.all<Size>(Size.fromHeight(_defaultMinimumHeight));
-  static final _smallFixedSize = MaterialStateProperty.all<Size>(Size.fromHeight(_smallMinimumHeight));
+  static final _defaultFixedSize = WidgetStateProperty.all<Size>(Size.fromHeight(_defaultMinimumHeight));
+  static final _smallFixedSize = WidgetStateProperty.all<Size>(Size.fromHeight(_smallMinimumHeight));
 
   static final _defaultPadding =
-      MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10));
+      WidgetStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10));
   static final _smallPadding =
-      MaterialStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4));
+      WidgetStateProperty.all<EdgeInsetsGeometry>(const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4));
 
-  static final _defaultTextStyle = MaterialStateProperty.all<TextStyle>($styles.text.btn);
-  static final _smallTextStyle = MaterialStateProperty.all<TextStyle>($styles.text.btn);
+  static final _defaultTextStyle = WidgetStateProperty.all<TextStyle>($styles.text.btn);
+  static final _smallTextStyle = WidgetStateProperty.all<TextStyle>($styles.text.btn);
 
   static final defaultButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return $styles.colors.grey3;
       }
       return _defaultBackgroundColor;
     }),
-    foregroundColor: MaterialStateProperty.all<Color>(defaultForegroundColor),
+    foregroundColor: WidgetStateProperty.all<Color>(defaultForegroundColor),
     elevation: _elevation,
     shape: _buttonShape,
     minimumSize: _defaultMinimumSize,
@@ -290,9 +283,9 @@ abstract class AppButtonStyle {
   );
 
   static final textButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(_outlineBackgroundColor),
-    foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.all<Color>(_outlineBackgroundColor),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return $styles.colors.grey3;
       }
       return outlineForegroundColor;
@@ -307,9 +300,9 @@ abstract class AppButtonStyle {
   );
 
   static final outlineButtonStyle = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(_outlineBackgroundColor),
-    foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.disabled)) {
+    backgroundColor: WidgetStateProperty.all<Color>(_outlineBackgroundColor),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.disabled)) {
         return $styles.colors.grey3;
       }
       return outlineForegroundColor;
@@ -320,8 +313,8 @@ abstract class AppButtonStyle {
     fixedSize: _defaultFixedSize,
     padding: _defaultPadding,
     textStyle: _defaultTextStyle,
-    side: MaterialStateProperty.resolveWith<BorderSide>((Set<MaterialState> states) {
-      final color = states.contains(MaterialState.disabled) ? $styles.colors.grey3 : outlineForegroundColor;
+    side: WidgetStateProperty.resolveWith<BorderSide>((Set<WidgetState> states) {
+      final color = states.contains(WidgetState.disabled) ? $styles.colors.grey3 : outlineForegroundColor;
       return BorderSide(color: color, width: 1);
     }),
   );

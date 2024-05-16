@@ -84,4 +84,6 @@ class AppLogic {
     }
     SystemChrome.setPreferredOrientations(orientations);
   }
+
+  bool shouldUseBiggerInsets() => _appSize.width > _appSize.height;
 }
