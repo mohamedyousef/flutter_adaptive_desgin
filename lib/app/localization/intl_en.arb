@@ -16,5 +16,14 @@
   "uploadingFailedNetworkErrorMessage": "Failed to upload.",
   "insufficientPermissionsNetworkErrorMessage": "Insufficient permissions to perform this action.",
   "sometingWentWrong": "Something went wrong.",
-  "noInternet": "It looks like you have no internet connection"
+  "noInternet": "It looks like you have no internet connection",
+  "@HOME": "****************************************************************",
+  "subscriptionExpiredMessage": "This subscription expires in a month",
+  "userPortfolioProfitsTitle": "Profits",
+  "userPortfolioAssetsTitle": "Assets",
+  "userPortfolioProfitsPercentageValue": "{number}%",
+  "userPortfolioBalanceTitle": "Balance",
+  "price": "${number}",
+  "filter": "Filter",
+  "openTrades": "Open Trades"
 }

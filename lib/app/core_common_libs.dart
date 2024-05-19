@@ -7,3 +7,5 @@ export '../app/localization/generated/l10n.dart';
 export '../app/router/router.dart';
 export '../app/styles/colors.dart';
 export '../app/styles/styles.dart';
+export '../app/core/helper/animations.dart';
+export 'package:network/network.dart';

@@ -12,8 +12,7 @@ void main() {
     SystemChrome.setSystemUIOverlayStyle($styles.systemUiOverlayStyle);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-    ProviderContainer providerContainer = ProviderContainer();
-    runApp(UncontrolledProviderScope(container: providerContainer, child: const MyApp()));
+    runApp(const ProviderScope(child: MyApp()));
     await appLogic.bootstrap();
     FlutterNativeSplash.remove();
   }, (error, stack) {});

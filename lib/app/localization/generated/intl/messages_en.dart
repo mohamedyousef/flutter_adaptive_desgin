@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(number) => "\$${number}";
+
+  static String m1(number) => "${number}%";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appName": MessageLookupByLibrary.simpleMessage("Predictiva Task"),
@@ -27,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bad network connection."),
         "cancelNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage("The request was canceled."),
+        "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "forbiddenNetworkErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Access to the resource is forbidden."),
         "insufficientPermissionsNetworkErrorMessage":
@@ -37,14 +42,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No data available."),
         "noInternet": MessageLookupByLibrary.simpleMessage(
             "It looks like you have no internet connection"),
+        "openTrades": MessageLookupByLibrary.simpleMessage("Open Trades"),
         "otherNetworkErrorMessage": MessageLookupByLibrary.simpleMessage(
             "An error occurred. Please try again later."),
         "parsingNetworkErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Error parsing response data."),
+        "price": m0,
         "serverNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage("Server error."),
         "sometingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong."),
+        "subscriptionExpiredMessage": MessageLookupByLibrary.simpleMessage(
+            "This subscription expires in a month"),
         "tryAgainButton": MessageLookupByLibrary.simpleMessage("Try Again"),
         "unProcessableNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage(
@@ -52,6 +61,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "unauthorisedNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage("Unauthorized access."),
         "uploadingFailedNetworkErrorMessage":
-            MessageLookupByLibrary.simpleMessage("Failed to upload.")
+            MessageLookupByLibrary.simpleMessage("Failed to upload."),
+        "userPortfolioAssetsTitle":
+            MessageLookupByLibrary.simpleMessage("Assets"),
+        "userPortfolioBalanceTitle":
+            MessageLookupByLibrary.simpleMessage("Balance"),
+        "userPortfolioProfitsPercentageValue": m1,
+        "userPortfolioProfitsTitle":
+            MessageLookupByLibrary.simpleMessage("Profits")
       };
 }

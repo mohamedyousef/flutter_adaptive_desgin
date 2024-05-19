@@ -39,10 +39,11 @@ class _RawButton extends StatelessWidget {
   final double? iconSize;
   final CrossAxisAlignment? crossAxisAlignment;
   final BorderRadius? borderRadius;
-
+  final bool showLabel;
   const _RawButton({
     required this.onPressed,
     required this.label,
+    this.showLabel = true,
     this.crossAxisAlignment,
     this.iconSize,
     this.borderSide,
@@ -76,19 +77,19 @@ class _RawButton extends StatelessWidget {
             size == ButtonSize.defaultSize ? AppButtonStyle.defaultButtonStyle : AppButtonStyle.smallDefaultButtonStyle;
         if (color != null) {
           buttonStyle = buttonStyle.copyWith(
-            backgroundColor: MaterialStateProperty.all<Color>(color!),
+            backgroundColor: WidgetStateProperty.all<Color>(color!),
           );
         }
 
         if (labelColor != null) {
           buttonStyle = buttonStyle.copyWith(
-            foregroundColor: MaterialStateProperty.all<Color>(labelColor!),
+            foregroundColor: WidgetStateProperty.all<Color>(labelColor!),
           );
         }
 
         if (borderRadius != null) {
           buttonStyle = buttonStyle.copyWith(
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: borderRadius!),
             ),
           );
@@ -100,21 +101,21 @@ class _RawButton extends StatelessWidget {
             size == ButtonSize.defaultSize ? AppButtonStyle.outlineButtonStyle : AppButtonStyle.smallOutlineButtonStyle;
         if (color != null) {
           buttonStyle = buttonStyle.copyWith(
-            foregroundColor: MaterialStateProperty.all<Color>(color!),
+            foregroundColor: WidgetStateProperty.all<Color>(color!),
           );
         }
         if (borderColor != null) {
           buttonStyle = buttonStyle.copyWith(
-            side: MaterialStateProperty.resolveWith<BorderSide>((Set<MaterialState> states) {
+            side: WidgetStateProperty.resolveWith<BorderSide>((Set<WidgetState> states) {
               final outlineBorder =
-                  states.contains(MaterialState.disabled) ? $styles.colors.accent1.withOpacity(0.3) : borderColor!;
+                  states.contains(WidgetState.disabled) ? $styles.colors.accent1.withOpacity(0.3) : borderColor!;
               return borderSide?.copyWith(color: borderColor) ?? BorderSide(color: outlineBorder, width: 1);
             }),
           );
         }
         if (borderRadius != null) {
           buttonStyle = buttonStyle.copyWith(
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: borderRadius!),
             ),
           );
@@ -126,24 +127,24 @@ class _RawButton extends StatelessWidget {
             size == ButtonSize.defaultSize ? AppButtonStyle.textButtonStyle : AppButtonStyle.smallTextButtonStyle;
         if (color != null) {
           buttonStyle = buttonStyle.copyWith(
-            foregroundColor: MaterialStateProperty.all<Color>(color!),
+            foregroundColor: WidgetStateProperty.all<Color>(color!),
           );
         }
         break;
     }
 
     if (backgroundColor != null) {
-      buttonStyle = buttonStyle.copyWith(backgroundColor: MaterialStatePropertyAll(backgroundColor));
+      buttonStyle = buttonStyle.copyWith(backgroundColor: WidgetStateProperty.all(backgroundColor));
     }
     if (textStyle != null) {
       buttonStyle = buttonStyle.copyWith(
-        textStyle: MaterialStatePropertyAll(textStyle),
+        textStyle: WidgetStateProperty.all(textStyle),
       );
     }
 
     if (padding != null) {
       buttonStyle = buttonStyle.copyWith(
-        padding: MaterialStatePropertyAll(padding),
+        padding: WidgetStateProperty.all(padding),
       );
     }
 
@@ -285,6 +286,7 @@ class AppButton extends StatelessWidget {
         textAlign: TextAlign.center,
         overflow: TextOverflow.ellipsis,
       ),
+      showLabel: label.isNotEmpty,
       labelColor: labelColor,
       borderSide: borderSide,
       borderColor: borderColor,
@@ -313,17 +315,18 @@ class AppButton extends StatelessWidget {
 
 class _LabelWithIconChild extends StatelessWidget {
   const _LabelWithIconChild({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     required this.iconColor,
     required this.iconSize,
     required this.buttonSize,
+    this.showLabel = true,
     this.crossAxisAlignment,
     this.spaceBetweenIconAndText = 8,
     this.isVerticalAlignment = false,
     this.iconBefore = false,
-  }) : super(key: key);
+  });
 
   final double spaceBetweenIconAndText;
   final Widget label;
@@ -331,6 +334,7 @@ class _LabelWithIconChild extends StatelessWidget {
   final Color iconColor;
   final double iconSize;
   final bool iconBefore;
+  final bool showLabel;
   final ButtonSize buttonSize;
   final bool isVerticalAlignment;
   final CrossAxisAlignment? crossAxisAlignment;
@@ -346,6 +350,8 @@ class _LabelWithIconChild extends StatelessWidget {
           ),
       child: icon,
     );
+
+    if (showLabel == false) return icon;
 
     return isVerticalAlignment
         ? Column(

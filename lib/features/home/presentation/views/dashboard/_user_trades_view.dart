@@ -5,6 +5,37 @@ class _UserTradesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      padding: EdgeInsets.all($styles.insets.md),
+      constraints: const BoxConstraints(
+        minWidth: double.infinity,
+        minHeight: 300,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: $styles.colors.borderColor,
+        ),
+        borderRadius: BorderRadius.circular($styles.corners.md),
+      ),
+      child: const _OrdersListView(),
+    );
+  }
+}
+
+class _OrdersListView extends ConsumerWidget {
+  const _OrdersListView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return TableView<String>(
+      onFilterButtonPressed: () {},
+      items: [],
+      itemBuilder: (context, item) => const SizedBox(),
+      columns: [],
+      onNextButtonPressed: () {},
+      onPrevButtonPressed: () {},
+    );
   }
 }

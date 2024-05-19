@@ -114,9 +114,9 @@ class TextInput extends StatelessWidget {
                 textInputAction: textInputAction,
                 expands: height != null,
                 autofocus: autoFocus,
-                style: $styles.text.bodySmall.copyWith(
-                  color: $styles.colors.black,
-                ),
+                // style: $styles.text.bodySmall.copyWith(
+                //   color: $styles.colors.black,
+                // ),
                 textAlign: textAlign ?? TextAlign.start,
                 initialValue: initialValue,
                 keyboardType: keyboardType,
@@ -158,7 +158,7 @@ class TextInput extends StatelessWidget {
                   ),
                   suffixIconConstraints: const BoxConstraints(minHeight: 5, minWidth: 5),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                  hintStyle: TextStyle(color: $styles.colors.grey4),
+                  hintStyle: TextStyle(color: $styles.colors.grey),
                   hintText: hint,
                   labelText: label,
                   labelStyle: $styles.text.body.copyWith(
@@ -177,13 +177,13 @@ class TextInput extends StatelessWidget {
             ),
           ),
           if (error != null || message != null) Gap($styles.insets.xxs),
-          if (error != null && error!.isNotEmpty)
-            Text(
-              error!,
-              style: $styles.text.bodySmall.copyWith(color: $styles.colors.danger100),
-            )
-          else if (message != null)
-            Text(message!, style: $styles.text.bodySmall.copyWith(color: $styles.colors.grey4))
+          // if (error != null && error!.isNotEmpty)
+          //   Text(
+          //     error!,
+          //     style: $styles.text.bodySmall.copyWith(color: $styles.colors.danger100),
+          //   )
+          // else if (message != null)
+          //   Text(message!, style: $styles.text.bodySmall.copyWith(color: $styles.colors.grey4))
         ],
       ),
     );

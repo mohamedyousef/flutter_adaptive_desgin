@@ -16,7 +16,7 @@ class ErrorView extends StatelessWidget {
         Text(
           message,
           style: $styles.text.body.copyWith(
-            color: $styles.colors.accent2,
+            color: $styles.colors.white,
           ),
         ),
         if (onRefreshButtonPressed != null) ...[

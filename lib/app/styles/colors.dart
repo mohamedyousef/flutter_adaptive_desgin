@@ -2,23 +2,17 @@ import '../../common_libs.dart';
 
 class AppColors {
   /// Common
-  final Color accent1 = const Color(0xFF0097A7);
-  final Color accent2 = const Color(0xFFFF6C0A);
-  final Color offWhite = const Color(0xFFF8ECE5);
 
-  final Color grey0 = const Color(0xFFDFDFDF);
-  final Color grey20 = const Color(0xffF6F6F6);
-  final Color grey1 = const Color(0xFF9D9995);
-  final Color grey2 = const Color(0xFF9D9995);
-  final Color grey3 = const Color(0xFFCCCCCC);
-  final Color grey4 = const Color(0xFF999999);
-  final Color grey5 = const Color(0xFF666666);
-  final Color grey6 = const Color(0xFF9D9995);
-
+  final Color grey = const Color(0xFFE1E1E5);
+  final Color black20 = const Color(0xFF19191B);
+  final Color accent1 = const Color(0xFF00BCAF);
   final Color disabledGrey = const Color(0xFFF8F8F8);
 
   final Color white = Colors.white;
-  final Color black = const Color(0xFF1E1B18);
+  final Color black = const Color(0xFF0D0D0F);
+  final Color warning = const Color(0xFFE7B500);
+
+  final Color borderColor = const Color(0xFF3E3F48);
 
   final Color success100 = const Color(0xFF1E1B18);
   final Color success = const Color(0xFF4DAF00);
@@ -37,12 +31,12 @@ class AppColors {
     ColorScheme colorScheme = ColorScheme(
       // Map our custom theme to the Material ColorScheme
       brightness: isDark ? Brightness.dark : Brightness.light,
-      primary: accent1,
-      primaryContainer: accent1,
-      secondary: accent1,
-      secondaryContainer: accent1,
+      primary: black,
+      primaryContainer: black,
+      secondary: black,
+      secondaryContainer: black,
       surface: Colors.white,
-      onSurface: accent1,
+      onSurface: black,
       onError: Colors.white,
       onPrimary: Colors.white,
       surfaceTint: Colors.transparent,
@@ -54,7 +48,7 @@ class AppColors {
     /// Also add on some extra properties that ColorScheme seems to miss
     var t = ThemeData.from(textTheme: txtTheme, colorScheme: colorScheme).copyWith(
       textSelectionTheme:
-          TextSelectionThemeData(cursorColor: accent1, selectionColor: accent1, selectionHandleColor: black),
+          TextSelectionThemeData(cursorColor: white, selectionColor: white, selectionHandleColor: black),
     );
 
     /// Return the themeData which MaterialApp can now use

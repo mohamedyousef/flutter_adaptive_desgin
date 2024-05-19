@@ -209,6 +209,86 @@ class AppLocalization {
       args: [],
     );
   }
+
+  /// `This subscription expires in a month`
+  String get subscriptionExpiredMessage {
+    return Intl.message(
+      'This subscription expires in a month',
+      name: 'subscriptionExpiredMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profits`
+  String get userPortfolioProfitsTitle {
+    return Intl.message(
+      'Profits',
+      name: 'userPortfolioProfitsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assets`
+  String get userPortfolioAssetsTitle {
+    return Intl.message(
+      'Assets',
+      name: 'userPortfolioAssetsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{number}%`
+  String userPortfolioProfitsPercentageValue(Object number) {
+    return Intl.message(
+      '$number%',
+      name: 'userPortfolioProfitsPercentageValue',
+      desc: '',
+      args: [number],
+    );
+  }
+
+  /// `Balance`
+  String get userPortfolioBalanceTitle {
+    return Intl.message(
+      'Balance',
+      name: 'userPortfolioBalanceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `${number}`
+  String price(Object number) {
+    return Intl.message(
+      '\$$number',
+      name: 'price',
+      desc: '',
+      args: [number],
+    );
+  }
+
+  /// `Filter`
+  String get filter {
+    return Intl.message(
+      'Filter',
+      name: 'filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Trades`
+  String get openTrades {
+    return Intl.message(
+      'Open Trades',
+      name: 'openTrades',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

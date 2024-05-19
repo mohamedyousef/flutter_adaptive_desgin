@@ -22,9 +22,19 @@ class PredictivaAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      decoration: BoxDecoration(
+        color: $styles.colors.black20,
+        border: Border(
+          bottom: BorderSide(
+            color: $styles.colors.borderColor,
+            width: 1,
+          ),
+        ),
+      ),
+    );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight.scale());
+  Size get preferredSize => Size.fromHeight(80.scale());
 }

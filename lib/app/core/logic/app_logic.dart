@@ -9,16 +9,10 @@ import 'package:predictiva_task/common_libs.dart';
 class AppLogic {
   Size _appSize = Size.zero;
 
-  /// Indicates to the rest of the app that bootstrap has not completed.
-  /// The router will use this to prevent redirects while bootstrapping.
   bool isBootstrapComplete = false;
 
-  /// Indicates which orientations the app will allow be default. Affects Android/iOS devices only.
-  /// Defaults to both landscape (hz) and portrait (vt)
   List<Axis> supportedOrientations = [Axis.vertical, Axis.horizontal];
 
-  /// Allow a view to override the currently supported orientations. For example, [FullscreenVideoViewer] always wants to enable both landscape and portrait.
-  /// If a view sets this override, they are responsible for setting it back to null when finished.
   List<Axis>? _supportedOrientationsOverride;
   set supportedOrientationsOverride(List<Axis>? value) {
     if (_supportedOrientationsOverride != value) {
@@ -85,5 +79,7 @@ class AppLogic {
     SystemChrome.setPreferredOrientations(orientations);
   }
 
-  bool shouldUseBiggerInsets() => _appSize.width > _appSize.height;
+  bool shouldUseBiggerInsets() {
+    return _appSize.width > _appSize.height;
+  }
 }

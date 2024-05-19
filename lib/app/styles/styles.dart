@@ -85,42 +85,14 @@ class _Text {
 
   TextStyle get titleFont => getFontForLocale();
 
-  TextStyle get quoteFont => getFontForLocale();
-
   TextStyle get contentFont => getFontForLocale();
 
-  late final TextStyle dropCase = _createFont(quoteFont, sizePx: 56, heightPx: 20);
-
-  late final TextStyle h1 = _createFont(titleFont, sizePx: 64, heightPx: 62);
-  late final TextStyle h2 = _createFont(titleFont, sizePx: 32, heightPx: 60);
-  late final TextStyle h3 = _createFont(titleFont, sizePx: 20, heightPx: 36, weight: FontWeight.w600);
-  late final TextStyle h4 = _createFont(contentFont, sizePx: 14, heightPx: 23, spacingPc: 5, weight: FontWeight.w600);
-
-  late final TextStyle title1 = _createFont(titleFont, sizePx: 16, heightPx: 26, spacingPc: 5);
-  late final TextStyle title1Bold =
-      _createFont(titleFont, sizePx: 16, heightPx: 26, spacingPc: 5, weight: FontWeight.w700);
-
-  late final TextStyle title2 = _createFont(titleFont, sizePx: 14, heightPx: 16.38);
-  late final TextStyle number = _createFont(titleFont, sizePx: 20, heightPx: 26, spacingPc: 5);
-
-  late final TextStyle body = _createFont(contentFont, sizePx: 16, heightPx: 26);
+  late final TextStyle h5 = _createFont(titleFont, sizePx: 24, heightPx: 28.8);
+  late final TextStyle h5Bold = _createFont(titleFont, sizePx: 24, heightPx: 28.8, weight: FontWeight.w600);
+  late final TextStyle subTitle1 = _createFont(contentFont, sizePx: 18, heightPx: 26.1);
+  late final TextStyle body = _createFont(contentFont, sizePx: 16, heightPx: 23.2);
   late final TextStyle bodyBold = _createFont(contentFont, sizePx: 16, heightPx: 26, weight: FontWeight.w600);
-  late final TextStyle bodySmall = _createFont(contentFont, sizePx: 14, heightPx: 23);
-  late final TextStyle bodySmallBold = _createFont(contentFont, sizePx: 14, heightPx: 23, weight: FontWeight.w600);
-  late final TextStyle bodyTiny = _createFont(contentFont, sizePx: 12, heightPx: 23);
-  late final TextStyle bodyNano = _createFont(contentFont, sizePx: 11, heightPx: 23);
-  late final TextStyle bodyNanoBold = _createFont(contentFont, sizePx: 11, heightPx: 23, weight: FontWeight.bold);
 
-  late final TextStyle quote1 =
-      _createFont(quoteFont, sizePx: 32, heightPx: 40, weight: FontWeight.w600, spacingPc: -3);
-  late final TextStyle quote2 = _createFont(quoteFont, sizePx: 21, heightPx: 32, weight: FontWeight.w400);
-  late final TextStyle quote2Sub = _createFont(body, sizePx: 16, heightPx: 40, weight: FontWeight.w400);
-
-  late final TextStyle caption =
-      _createFont(contentFont, sizePx: 14, heightPx: 20, weight: FontWeight.w500).copyWith(fontStyle: FontStyle.italic);
-
-  late final TextStyle callout =
-      _createFont(contentFont, sizePx: 16, heightPx: 26, weight: FontWeight.w600).copyWith(fontStyle: FontStyle.italic);
   late final TextStyle btn = _createFont(contentFont, sizePx: 14, weight: FontWeight.w500, spacingPc: 2, heightPx: 14);
 
   TextStyle _createFont(TextStyle style,
@@ -155,6 +127,7 @@ class _Corners {
 
 class _Sizes {
   double get maxContentWidth => 1350;
+
   final Size minAppSize = const Size(380, 650);
 }
 
@@ -197,14 +170,14 @@ abstract class TxtInputStyle {
     focusedBorder: _focusedInputBorder,
     errorBorder: errorInputBorder,
     focusedErrorBorder: focusedErrorInputBorder,
-    labelStyle: $styles.text.bodySmall,
-    hintStyle: $styles.text.bodySmall,
-    helperStyle: $styles.text.bodySmall,
-    errorStyle: $styles.text.bodySmall.copyWith(color: $styles.colors.danger100),
+    // labelStyle: $styles.text.bodySmall,
+    // hintStyle: $styles.text.bodySmall,
+    // helperStyle: $styles.text.bodySmall,
+    // errorStyle: $styles.text.bodySmall.copyWith(color: $styles.colors.danger100),
   );
 
   static final _disabledInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: $styles.colors.grey3, width: 1),
+    borderSide: BorderSide(color: $styles.colors.grey, width: 1),
     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
   );
   static final _focusedInputBorder = OutlineInputBorder(
@@ -213,12 +186,12 @@ abstract class TxtInputStyle {
   );
 
   static final _enabledInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: $styles.colors.grey3, width: 1),
+    borderSide: BorderSide(color: $styles.colors.grey, width: 1),
     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
   );
 
   static final searchInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: $styles.colors.grey3, width: 1),
+    borderSide: BorderSide(color: $styles.colors.grey, width: 1),
     borderRadius: const BorderRadius.all(Radius.circular(15.0)),
   );
   static final errorInputBorder = OutlineInputBorder(
@@ -269,7 +242,7 @@ abstract class AppButtonStyle {
   static final defaultButtonStyle = ButtonStyle(
     backgroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
       if (states.contains(WidgetState.disabled)) {
-        return $styles.colors.grey3;
+        return $styles.colors.grey;
       }
       return _defaultBackgroundColor;
     }),
@@ -286,7 +259,7 @@ abstract class AppButtonStyle {
     backgroundColor: WidgetStateProperty.all<Color>(_outlineBackgroundColor),
     foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
       if (states.contains(WidgetState.disabled)) {
-        return $styles.colors.grey3;
+        return $styles.colors.grey;
       }
       return outlineForegroundColor;
     }),
@@ -303,7 +276,7 @@ abstract class AppButtonStyle {
     backgroundColor: WidgetStateProperty.all<Color>(_outlineBackgroundColor),
     foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
       if (states.contains(WidgetState.disabled)) {
-        return $styles.colors.grey3;
+        return $styles.colors.grey;
       }
       return outlineForegroundColor;
     }),
@@ -314,7 +287,7 @@ abstract class AppButtonStyle {
     padding: _defaultPadding,
     textStyle: _defaultTextStyle,
     side: WidgetStateProperty.resolveWith<BorderSide>((Set<WidgetState> states) {
-      final color = states.contains(WidgetState.disabled) ? $styles.colors.grey3 : outlineForegroundColor;
+      final color = states.contains(WidgetState.disabled) ? $styles.colors.grey : outlineForegroundColor;
       return BorderSide(color: color, width: 1);
     }),
   );

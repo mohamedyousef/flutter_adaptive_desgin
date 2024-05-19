@@ -1,7 +1,7 @@
 import 'package:predictiva_task/app/core/models/models.dart';
 import '../../../common_libs.dart';
 
-String transformNetworkErrorMessage(ResultErrorType resultErrorType) {
+String transformErrorMessage(ResultErrorType resultErrorType) {
   switch (resultErrorType) {
     case ResultErrorType.cancel:
       return $strings.cancelNetworkErrorMessage;
