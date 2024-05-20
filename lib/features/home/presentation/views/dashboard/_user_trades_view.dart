@@ -1,15 +1,19 @@
 part of 'dashboard_view.dart';
 
-class _UserTradesView extends StatelessWidget {
+final _singleOrderModelProvider = Provider<OrderModel>((ref) {
+  throw UnimplementedError();
+});
+
+class _UserTradesView extends ConsumerWidget {
   const _UserTradesView();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(ordersListViewModel);
     return Container(
       padding: EdgeInsets.all($styles.insets.md),
       constraints: const BoxConstraints(
         minWidth: double.infinity,
-        minHeight: 300,
       ),
       decoration: BoxDecoration(
         border: Border.all(
@@ -17,25 +21,157 @@ class _UserTradesView extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular($styles.corners.md),
       ),
-      child: const _OrdersListView(),
+      child: AnimatedSwitcher(
+        duration: $styles.times.med,
+        child: state.maybeWhen(
+          orElse: () => const Center(
+            child: AppCircularIndicator(),
+          ),
+          data: (data) => _OrdersListView(data.orders),
+        ),
+      ),
     );
   }
 }
 
-class _OrdersListView extends ConsumerWidget {
-  const _OrdersListView({
-    super.key,
-  });
+class _OrdersListView extends StatelessWidget {
+  final List<OrderModel> items;
+  const _OrdersListView(this.items);
+
+  @override
+  Widget build(BuildContext context) {
+    final isBigger = appLogic.shouldUseBiggerInsets(context);
+    return TableView<OrderModel>(
+      onFilterButtonPressed: () {},
+      items: items,
+      itemBuilder: (context, item) => ProviderScope(
+        overrides: [_singleOrderModelProvider.overrideWithValue(item)],
+        child: isBigger ? const _OrderLandscapeView() : const _OrderPortraitView(),
+      ),
+      columns: [],
+      perPage: 5,
+    );
+  }
+}
+
+class _OrderLandscapeView extends ConsumerWidget {
+  const _OrderLandscapeView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return TableView<String>(
-      onFilterButtonPressed: () {},
-      items: [],
-      itemBuilder: (context, item) => const SizedBox(),
-      columns: [],
-      onNextButtonPressed: () {},
-      onPrevButtonPressed: () {},
+    final orderModel = ref.watch(_singleOrderModelProvider);
+    Widget buildSection(String title) {
+      return Expanded(
+        child: Text(
+          title,
+          style: $styles.text.body.copyWith(
+            color: $styles.colors.grey2,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      );
+    }
+
+    Widget buildAction() {
+      return Expanded(
+        child: Container(
+          padding: EdgeInsets.all(
+            $styles.insets.xs,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: $styles.colors.danger100,
+            ),
+            borderRadius: BorderRadius.circular($styles.corners.lg),
+          ),
+          child: Text(
+            orderModel.side,
+            style: $styles.text.body.copyWith(
+              color: $styles.colors.danger100,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Row(
+      children: [
+        buildSection(orderModel.symbol),
+        buildSection('${orderModel.price}'),
+        buildSection(orderModel.type),
+        buildAction(),
+        buildSection('${orderModel.quantity}'),
+        buildSection(orderModel.creationTime),
+      ],
+    );
+  }
+}
+
+class _OrderPortraitView extends ConsumerWidget {
+  const _OrderPortraitView({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final orderModel = ref.watch(_singleOrderModelProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: $styles.insets.sm),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                orderModel.symbol,
+                style: $styles.text.subTitle2.copyWith(
+                  color: $styles.colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                '${orderModel.quantity}',
+                style: $styles.text.body.copyWith(
+                  color: $styles.colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+          Gap($styles.insets.xs),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(
+                  $styles.insets.xs,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: $styles.colors.danger100,
+                  ),
+                  borderRadius: BorderRadius.circular($styles.corners.lg),
+                ),
+                child: Text(
+                  orderModel.side,
+                  style: $styles.text.body.copyWith(
+                    color: $styles.colors.danger100,
+                  ),
+                ),
+              ),
+              Text(
+                orderModel.creationTime,
+                style: $styles.text.body.copyWith(
+                  color: $styles.colors.grey2,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+          Divider(
+            color: $styles.colors.borderColor,
+          ),
+        ],
+      ),
     );
   }
 }

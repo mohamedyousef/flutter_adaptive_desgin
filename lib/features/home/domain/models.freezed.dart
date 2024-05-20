@@ -198,8 +198,8 @@ mixin _$OrderModel {
   double get price => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  SideType get side => throw _privateConstructorUsedError;
-  DateTime get creationTime => throw _privateConstructorUsedError;
+  String get side => throw _privateConstructorUsedError;
+  String get creationTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderModelCopyWith<OrderModel> get copyWith =>
@@ -217,8 +217,8 @@ abstract class $OrderModelCopyWith<$Res> {
       double price,
       String symbol,
       String type,
-      SideType side,
-      DateTime creationTime});
+      String side,
+      String creationTime});
 }
 
 /// @nodoc
@@ -261,11 +261,11 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
       side: null == side
           ? _value.side
           : side // ignore: cast_nullable_to_non_nullable
-              as SideType,
+              as String,
       creationTime: null == creationTime
           ? _value.creationTime
           : creationTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ) as $Val);
   }
 }
@@ -283,8 +283,8 @@ abstract class _$$OrderModelImplCopyWith<$Res>
       double price,
       String symbol,
       String type,
-      SideType side,
-      DateTime creationTime});
+      String side,
+      String creationTime});
 }
 
 /// @nodoc
@@ -325,11 +325,11 @@ class __$$OrderModelImplCopyWithImpl<$Res>
       side: null == side
           ? _value.side
           : side // ignore: cast_nullable_to_non_nullable
-              as SideType,
+              as String,
       creationTime: null == creationTime
           ? _value.creationTime
           : creationTime // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
     ));
   }
 }
@@ -354,9 +354,9 @@ class _$OrderModelImpl implements _OrderModel {
   @override
   final String type;
   @override
-  final SideType side;
+  final String side;
   @override
-  final DateTime creationTime;
+  final String creationTime;
 
   @override
   String toString() {
@@ -395,8 +395,8 @@ abstract class _OrderModel implements OrderModel {
       required final double price,
       required final String symbol,
       required final String type,
-      required final SideType side,
-      required final DateTime creationTime}) = _$OrderModelImpl;
+      required final String side,
+      required final String creationTime}) = _$OrderModelImpl;
 
   @override
   double get quantity;
@@ -407,9 +407,9 @@ abstract class _OrderModel implements OrderModel {
   @override
   String get type;
   @override
-  SideType get side;
+  String get side;
   @override
-  DateTime get creationTime;
+  String get creationTime;
   @override
   @JsonKey(ignore: true)
   _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>

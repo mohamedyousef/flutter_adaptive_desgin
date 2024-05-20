@@ -1,17 +1,19 @@
-import '../../common_libs.dart';
+import 'package:predictiva_task/common_libs.dart';
 
 class AppColors {
   /// Common
 
   final Color grey = const Color(0xFFE1E1E5);
+  final Color grey2 = const Color(0xFFB1B1B8);
+
   final Color black20 = const Color(0xFF19191B);
   final Color accent1 = const Color(0xFF00BCAF);
-  final Color disabledGrey = const Color(0xFFF8F8F8);
+  final Color disabledGrey = const Color(0xFFB1B1B8);
+  final Color enabledGrey = const Color(0xFFEDEDF0);
 
   final Color white = Colors.white;
   final Color black = const Color(0xFF0D0D0F);
   final Color warning = const Color(0xFFE7B500);
-
   final Color borderColor = const Color(0xFF3E3F48);
 
   final Color success100 = const Color(0xFF1E1B18);
@@ -19,7 +21,7 @@ class AppColors {
 
   final bool isDark = true;
 
-  final Color danger100 = Colors.red.shade400;
+  final Color danger100 = const Color(0xFFE40C0C);
 
   final Color transparent = Colors.transparent;
 

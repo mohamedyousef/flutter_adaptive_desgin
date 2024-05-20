@@ -1,8 +1,7 @@
 part of 'dashboard_view.dart';
 
 final _singleUserPortfolioProvider = Provider<UserPortfolioModel>((ref) {
-  // throw UnimplementedError();
-  return const UserPortfolioModel(balance: 616.81, profits: 89.03, profitPercentage: 20, assets: 12);
+  throw UnimplementedError();
 });
 
 class _UserPortfolioInfoLayout extends ConsumerWidget {
@@ -24,7 +23,8 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
       String title,
       String value,
     ) =>
-        Center(
+        Align(
+          alignment: Alignment.centerLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,23 +36,38 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
               Text(
                 value,
                 style: $styles.text.h5Bold,
-              )
+              ),
             ],
           ),
         );
 
     Widget userPortfolioInfo() {
+      final padding = width < 600 ? $styles.insets.sm : $styles.insets.lg;
       final sections = [
-        Expanded(child: buildSection($strings.userPortfolioBalanceTitle, $strings.price(userPortfolio.profits))),
+        Gap(padding),
+        Expanded(
+          child: buildSection(
+            $strings.userPortfolioBalanceTitle,
+            $strings.price(userPortfolio.balance),
+          ),
+        ),
+        Gap(padding),
         buildSeparator(),
-        Expanded(child: buildSection($strings.userPortfolioProfitsTitle, $strings.price(userPortfolio.profits))),
+        Gap(padding),
+        Expanded(
+          child: buildSection(
+            $strings.userPortfolioProfitsTitle,
+            $strings.price(userPortfolio.profits),
+          ),
+        ),
         buildSeparator(),
+        Gap(padding),
         Expanded(child: buildSection($strings.userPortfolioAssetsTitle, "${userPortfolio.assets}")),
       ];
 
       return AnimatedSwitcher(
         duration: const Duration(seconds: 1),
-        child: (width > 600)
+        child: (width >= 600)
             ? Row(
                 children: sections,
               )
@@ -92,7 +107,8 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ColoredBox(
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: width > 600 ? 0.0 : $styles.insets.sm),
           color: $styles.colors.black20,
           child: SizedBox(
             height: width < 600 ? 280 : 148,
@@ -120,7 +136,9 @@ class _UserPortfolioView extends ConsumerWidget {
       ),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        border: Border.all(color: $styles.colors.borderColor, width: 1.0),
+        border: Border.all(
+          color: $styles.colors.borderColor,
+        ),
         borderRadius: BorderRadius.circular($styles.corners.md),
       ),
       child: AnimatedSwitcher(

@@ -79,7 +79,8 @@ class AppLogic {
     SystemChrome.setPreferredOrientations(orientations);
   }
 
-  bool shouldUseBiggerInsets() {
-    return _appSize.width > _appSize.height;
+  bool shouldUseBiggerInsets(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    return size.width > 600;
   }
 }

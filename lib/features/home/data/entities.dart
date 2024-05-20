@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:predictiva_task/features/home/domain/models.dart';
 
 part 'entities.g.dart';
 
@@ -71,7 +70,7 @@ class OrderEntity {
   @JsonKey(name: 'type')
   final String? type;
   @JsonKey(name: 'side')
-  final SideType? side;
+  final String? side;
   @JsonKey(name: 'quantity')
   final double? quantity;
   @JsonKey(name: 'price')

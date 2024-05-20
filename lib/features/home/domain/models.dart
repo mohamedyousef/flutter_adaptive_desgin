@@ -18,8 +18,8 @@ class OrderModel with _$OrderModel {
     required double price,
     required String symbol,
     required String type,
-    required SideType side,
-    required DateTime creationTime,
+    required String side,
+    required String creationTime,
   }) = _OrderModel;
 }
 
@@ -46,11 +46,4 @@ class OrderList with _$OrderList {
 @freezed
 class FilterModel with _$FilterModel {
   const factory FilterModel() = _FilterModel;
-}
-
-enum SideType {
-  @JsonValue('SELL')
-  sell,
-  @JsonValue('BUY')
-  buy,
 }

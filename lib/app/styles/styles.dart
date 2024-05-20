@@ -90,6 +90,8 @@ class _Text {
   late final TextStyle h5 = _createFont(titleFont, sizePx: 24, heightPx: 28.8);
   late final TextStyle h5Bold = _createFont(titleFont, sizePx: 24, heightPx: 28.8, weight: FontWeight.w600);
   late final TextStyle subTitle1 = _createFont(contentFont, sizePx: 18, heightPx: 26.1);
+  late final TextStyle subTitle2 = _createFont(contentFont, sizePx: 16, heightPx: 23.2);
+
   late final TextStyle body = _createFont(contentFont, sizePx: 16, heightPx: 23.2);
   late final TextStyle bodyBold = _createFont(contentFont, sizePx: 16, heightPx: 26, weight: FontWeight.w600);
 
@@ -213,8 +215,8 @@ abstract class AppButtonStyle {
   );
 
   static final defaultForegroundColor = $styles.colors.white;
-  static final outlineForegroundColor = $styles.colors.accent1;
-  static final _defaultBackgroundColor = $styles.colors.accent1;
+  static final outlineForegroundColor = $styles.colors.white;
+  static final _defaultBackgroundColor = $styles.colors.borderColor;
   static final _outlineBackgroundColor = $styles.colors.transparent;
 
   static final _elevation = WidgetStateProperty.all<double>(0);
@@ -222,8 +224,8 @@ abstract class AppButtonStyle {
   static final _defaultMinimumHeight = 49.0.scale();
   static final _defaultMinimumWidth = 72.0.scale();
 
-  static final _smallMinimumHeight = 28.0.scale();
-  static final _smallMinimumWidth = 56.0.scale();
+  static final _smallMinimumHeight = 40.0.scale();
+  static final _smallMinimumWidth = 40.0.scale();
 
   static final _defaultMinimumSize = WidgetStateProperty.all<Size>(Size(_defaultMinimumWidth, _defaultMinimumHeight));
   static final _smallMinimumSize = WidgetStateProperty.all<Size>(Size(_smallMinimumWidth, _smallMinimumHeight));
@@ -242,7 +244,7 @@ abstract class AppButtonStyle {
   static final defaultButtonStyle = ButtonStyle(
     backgroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
       if (states.contains(WidgetState.disabled)) {
-        return $styles.colors.grey;
+        return $styles.colors.disabledGrey;
       }
       return _defaultBackgroundColor;
     }),
@@ -269,27 +271,33 @@ abstract class AppButtonStyle {
     fixedSize: _defaultFixedSize,
     padding: _defaultPadding,
     textStyle: _defaultTextStyle,
-    side: null,
   );
 
   static final outlineButtonStyle = ButtonStyle(
     backgroundColor: WidgetStateProperty.all<Color>(_outlineBackgroundColor),
-    foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-      if (states.contains(WidgetState.disabled)) {
-        return $styles.colors.grey;
-      }
-      return outlineForegroundColor;
-    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
+          return $styles.colors.disabledGrey;
+        }
+        return outlineForegroundColor;
+      },
+    ),
     elevation: _elevation,
     shape: _buttonShape,
     minimumSize: _defaultMinimumSize,
     fixedSize: _defaultFixedSize,
     padding: _defaultPadding,
     textStyle: _defaultTextStyle,
-    side: WidgetStateProperty.resolveWith<BorderSide>((Set<WidgetState> states) {
-      final color = states.contains(WidgetState.disabled) ? $styles.colors.grey : outlineForegroundColor;
-      return BorderSide(color: color, width: 1);
+    iconColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+      final color = states.contains(WidgetState.disabled) ? $styles.colors.disabledGrey : $styles.colors.enabledGrey;
+      return color;
     }),
+    side: WidgetStatePropertyAll(
+      BorderSide(
+        color: $styles.colors.borderColor,
+      ),
+    ),
   );
 
   static final smallDefaultButtonStyle = _makeSmallSizeStyle(defaultButtonStyle);

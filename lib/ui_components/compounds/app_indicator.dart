@@ -20,7 +20,7 @@ class AppCircularIndicator extends StatelessWidget {
       width: width ?? 40.0,
       height: height ?? 40.0,
       child: CircularProgressIndicator(
-        color: color,
+        color: color ?? $styles.colors.accent1,
         strokeWidth: strokeWidth,
       ),
     );

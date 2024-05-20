@@ -82,7 +82,7 @@ Map<String, dynamic> _$OrderListEntityToJson(OrderListEntity instance) =>
 OrderEntity _$OrderEntityFromJson(Map<String, dynamic> json) => OrderEntity(
       json['symbol'] as String?,
       json['type'] as String?,
-      $enumDecodeNullable(_$SideTypeEnumMap, json['side']),
+      json['side'] as String?,
       (json['quantity'] as num?)?.toDouble(),
       OrderEntity._fromJson((json['creation_time'] as num).toInt()),
       (json['price'] as num?)?.toDouble(),
@@ -92,13 +92,8 @@ Map<String, dynamic> _$OrderEntityToJson(OrderEntity instance) =>
     <String, dynamic>{
       'symbol': instance.symbol,
       'type': instance.type,
-      'side': _$SideTypeEnumMap[instance.side],
+      'side': instance.side,
       'quantity': instance.quantity,
       'price': instance.price,
       'creation_time': instance.creationTime.toIso8601String(),
     };
-
-const _$SideTypeEnumMap = {
-  SideType.sell: 'SELL',
-  SideType.buy: 'BUY',
-};

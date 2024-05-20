@@ -1,6 +1,6 @@
 import 'package:predictiva_task/app/core_common_libs.dart';
 import 'package:predictiva_task/common_libs.dart';
-import "package:predictiva_task/features/home/domain/models.dart";
+import 'package:predictiva_task/features/home/domain/models.dart';
 import 'package:predictiva_task/ui_components/compounds/app_indicator.dart';
 import 'package:predictiva_task/ui_components/compounds/table_view.dart';
 import 'package:predictiva_task/ui_components/ui_components.dart';

@@ -20,7 +20,7 @@ class _Layout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = appLogic.shouldUseBiggerInsets() ? $styles.insets.xxl : $styles.insets.md;
+    final padding = appLogic.shouldUseBiggerInsets(context) ? $styles.insets.xxl : $styles.insets.md;
     return SingleChildScrollView(
       child: CenteredBox(
         padding: EdgeInsets.all(padding),

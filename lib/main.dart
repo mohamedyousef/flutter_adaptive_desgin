@@ -6,16 +6,19 @@ import 'package:predictiva_task/app/core_common_libs.dart';
 import 'package:predictiva_task/common_libs.dart';
 
 void main() {
-  runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-    SystemChrome.setSystemUIOverlayStyle($styles.systemUiOverlayStyle);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+      SystemChrome.setSystemUIOverlayStyle($styles.systemUiOverlayStyle);
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-    runApp(const ProviderScope(child: MyApp()));
-    await appLogic.bootstrap();
-    FlutterNativeSplash.remove();
-  }, (error, stack) {});
+      runApp(const ProviderScope(child: MyApp()));
+      await appLogic.bootstrap();
+      FlutterNativeSplash.remove();
+    },
+    (error, stack) {},
+  );
 }
 
 class MyApp extends StatelessWidget {

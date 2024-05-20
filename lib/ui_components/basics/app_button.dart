@@ -99,20 +99,7 @@ class _RawButton extends StatelessWidget {
       case ButtonType.outline:
         buttonStyle =
             size == ButtonSize.defaultSize ? AppButtonStyle.outlineButtonStyle : AppButtonStyle.smallOutlineButtonStyle;
-        if (color != null) {
-          buttonStyle = buttonStyle.copyWith(
-            foregroundColor: WidgetStateProperty.all<Color>(color!),
-          );
-        }
-        if (borderColor != null) {
-          buttonStyle = buttonStyle.copyWith(
-            side: WidgetStateProperty.resolveWith<BorderSide>((Set<WidgetState> states) {
-              final outlineBorder =
-                  states.contains(WidgetState.disabled) ? $styles.colors.accent1.withOpacity(0.3) : borderColor!;
-              return borderSide?.copyWith(color: borderColor) ?? BorderSide(color: outlineBorder, width: 1);
-            }),
-          );
-        }
+
         if (borderRadius != null) {
           buttonStyle = buttonStyle.copyWith(
             shape: WidgetStateProperty.all(
@@ -158,6 +145,7 @@ class _RawButton extends StatelessWidget {
     if (icon != null) {
       child = _LabelWithIconChild(
         label: label,
+        showLabel: showLabel,
         icon: icon,
         crossAxisAlignment: crossAxisAlignment,
         iconColor: foregroundColor,
