@@ -27,6 +27,10 @@ class _UserTradesView extends ConsumerWidget {
           orElse: () => const Center(
             child: AppCircularIndicator(),
           ),
+          error: (err) => ErrorView(
+            message: err,
+            onRefreshButtonPressed: () => ref.refresh(ordersListViewModel),
+          ),
           data: (data) => _OrdersListView(data.orders),
         ),
       ),
@@ -48,7 +52,14 @@ class _OrdersListView extends StatelessWidget {
         overrides: [_singleOrderModelProvider.overrideWithValue(item)],
         child: isBigger ? const _OrderLandscapeView() : const _OrderPortraitView(),
       ),
-      columns: [],
+      columns: [
+        'Symbol',
+        'Price',
+        'Type',
+        'Action',
+        'Quantity',
+        'Date',
+      ],
       perPage: 5,
     );
   }
@@ -62,11 +73,13 @@ class _OrderLandscapeView extends ConsumerWidget {
     final orderModel = ref.watch(_singleOrderModelProvider);
     Widget buildSection(String title) {
       return Expanded(
-        child: Text(
-          title,
-          style: $styles.text.body.copyWith(
-            color: $styles.colors.grey2,
-            fontWeight: FontWeight.w400,
+        child: Center(
+          child: Text(
+            title,
+            style: $styles.text.body.copyWith(
+              color: $styles.colors.white,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       );
@@ -74,35 +87,48 @@ class _OrderLandscapeView extends ConsumerWidget {
 
     Widget buildAction() {
       return Expanded(
-        child: Container(
-          padding: EdgeInsets.all(
-            $styles.insets.xs,
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: $styles.colors.danger100,
+        child: Center(
+          child: Container(
+            padding: EdgeInsets.all(
+              $styles.insets.xs,
             ),
-            borderRadius: BorderRadius.circular($styles.corners.lg),
-          ),
-          child: Text(
-            orderModel.side,
-            style: $styles.text.body.copyWith(
-              color: $styles.colors.danger100,
+            decoration: BoxDecoration(
+              color: $styles.colors.black20,
+              border: Border.all(
+                color: $styles.colors.danger100,
+              ),
+              borderRadius: BorderRadius.circular($styles.corners.lg),
+            ),
+            child: Text(
+              orderModel.side,
+              style: $styles.text.body.copyWith(
+                color: $styles.colors.danger100,
+              ),
             ),
           ),
         ),
       );
     }
 
-    return Row(
-      children: [
-        buildSection(orderModel.symbol),
-        buildSection('${orderModel.price}'),
-        buildSection(orderModel.type),
-        buildAction(),
-        buildSection('${orderModel.quantity}'),
-        buildSection(orderModel.creationTime),
-      ],
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: $styles.insets.xxs),
+      padding: EdgeInsets.all($styles.insets.sm),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular($styles.corners.md),
+        border: Border.all(
+          color: $styles.colors.borderColor,
+        ),
+      ),
+      child: Row(
+        children: [
+          buildSection(orderModel.symbol),
+          buildSection('${orderModel.price}'),
+          buildSection(orderModel.type),
+          buildAction(),
+          buildSection('${orderModel.quantity}'),
+          buildSection(orderModel.creationTime),
+        ],
+      ),
     );
   }
 }

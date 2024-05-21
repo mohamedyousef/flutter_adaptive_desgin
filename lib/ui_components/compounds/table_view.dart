@@ -40,17 +40,9 @@ class TableView<T> extends ConsumerWidget {
           columns: columns,
         ),
         Gap($styles.insets.sm),
-        Divider(
-          color: $styles.colors.borderColor,
-        ),
-        Gap($styles.insets.sm),
         _TableBody(
           itemBuilder: itemBuilder,
         ),
-        Divider(
-          color: $styles.colors.borderColor,
-        ),
-        Gap($styles.insets.sm),
         const _TableFooter(),
       ],
     );
@@ -81,6 +73,24 @@ class _TableHeader extends StatelessWidget {
             color: $styles.colors.white,
           ),
         );
+
+    Widget buildSection(String title) {
+      return Expanded(
+        child: Center(
+          child: Text(
+            title,
+            style: $styles.text.subTitle2.copyWith(
+              color: $styles.colors.grey3,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      );
+    }
+
+    Widget buildColumns() => Row(
+          children: columns.map((e) => buildSection(e)).toList(),
+        );
     return Column(
       children: [
         Row(
@@ -96,6 +106,13 @@ class _TableHeader extends StatelessWidget {
             buildFilterButton(),
           ],
         ),
+        Gap($styles.insets.lg),
+        if (width < 600)
+          Divider(
+            color: $styles.colors.borderColor,
+          )
+        else
+          buildColumns(),
       ],
     );
   }
@@ -139,45 +156,54 @@ class _TableFooter extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(_tableViewModelProvider);
     final model = ref.watch(_tableViewModelProvider.notifier);
-    return Row(
+    return Column(
       children: [
-        Text(
-          '${max(1, model.firstIndex)} - ${model.endIndex} of ${model.total}',
-          style: $styles.text.body.copyWith(
-            fontWeight: FontWeight.w400,
-            color: $styles.colors.white,
+        if (!appLogic.shouldUseBiggerInsets(context))
+          Divider(
+            color: $styles.colors.borderColor,
           ),
-        ),
-        const Spacer(),
-        AppButton.outline(
-          buttonSize: ButtonSize.smallSize,
-          color: $styles.colors.accent1,
-          onPressed: model.hasPrev
-              ? () {
-                  model.prev();
-                }
-              : null,
-          label: '',
-          padding: EdgeInsets.zero,
-          icon: const Icon(
-            Icons.chevron_left,
-            size: 24,
-          ),
-        ),
-        Gap($styles.insets.xs),
-        AppButton.outline(
-          buttonSize: ButtonSize.smallSize,
-          padding: EdgeInsets.zero,
-          onPressed: model.hasNext
-              ? () {
-                  model.next();
-                }
-              : null,
-          label: '',
-          icon: const Icon(
-            Icons.chevron_right,
-            size: 24,
-          ),
+        Gap($styles.insets.sm),
+        Row(
+          children: [
+            Text(
+              '${max(1, model.firstIndex)} - ${model.endIndex} of ${model.total}',
+              style: $styles.text.body.copyWith(
+                fontWeight: FontWeight.w400,
+                color: $styles.colors.white,
+              ),
+            ),
+            const Spacer(),
+            AppButton.outline(
+              buttonSize: ButtonSize.smallSize,
+              color: $styles.colors.accent1,
+              onPressed: model.hasPrev
+                  ? () {
+                      model.prev();
+                    }
+                  : null,
+              label: '',
+              padding: EdgeInsets.zero,
+              icon: const Icon(
+                Icons.chevron_left,
+                size: 24,
+              ),
+            ),
+            Gap($styles.insets.xs),
+            AppButton.outline(
+              buttonSize: ButtonSize.smallSize,
+              padding: EdgeInsets.zero,
+              onPressed: model.hasNext
+                  ? () {
+                      model.next();
+                    }
+                  : null,
+              label: '',
+              icon: const Icon(
+                Icons.chevron_right,
+                size: 24,
+              ),
+            ),
+          ],
         ),
       ],
     );
