@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:predictiva_task/app/core_common_libs.dart';
 import 'package:predictiva_task/common_libs.dart';
 
 class DropDownFormFields<T> extends StatefulWidget {
@@ -44,56 +45,47 @@ class _DropDownFormFieldsState<T> extends State<DropDownFormFields> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(inputDecorationTheme: TxtInputStyle.inputDecorationTheme),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          IgnorePointer(
-            ignoring: widget.readOnly,
-            child: DropdownButtonHideUnderline(
-              child: DropdownButtonFormField(
-                value: dropdownValue ?? widget.initialValue,
-                style: $styles.text.body.copyWith(
-                  color: $styles.colors.white,
-                ),
-                icon: Icon(CupertinoIcons.chevron_down, color: $styles.colors.enabledGrey),
-                isExpanded: true,
-                onChanged: (newValue) {
-                  setState(() {
-                    dropdownValue = newValue as T?;
-                  });
-                  widget.onSelected?.call(newValue);
-                },
-                dropdownColor: $styles.colors.black20,
-                hint: Text(
-                  widget.hint ?? '',
-                  style: $styles.text.body.copyWith(
-                    color: $styles.colors.grey4,
-                  ),
-                ),
-                items: widget.items
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(
-                          '$e',
-                          style: $styles.text.body,
-                        ),
-                      ),
-                    )
-                    .toList(),
+    return SizedBox(
+      height: 55.scale(),
+      child: Theme(
+        data: Theme.of(context).copyWith(inputDecorationTheme: TxtInputStyle.inputDecorationTheme),
+        child: IgnorePointer(
+          ignoring: widget.readOnly,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButtonFormField(
+              value: dropdownValue ?? widget.initialValue,
+              style: $styles.text.body.copyWith(
+                color: $styles.colors.white,
               ),
+              icon: Icon(CupertinoIcons.chevron_down, color: $styles.colors.enabledGrey),
+              isExpanded: true,
+              onChanged: (newValue) {
+                setState(() {
+                  dropdownValue = newValue as T?;
+                });
+                widget.onSelected?.call(newValue);
+              },
+              dropdownColor: $styles.colors.black20,
+              hint: Text(
+                widget.hint ?? '',
+                style: $styles.text.body.copyWith(
+                  color: $styles.colors.grey4,
+                ),
+              ),
+              items: widget.items
+                  .map(
+                    (e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(
+                        '$e',
+                        style: $styles.text.body,
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
-          if (widget.errorText != null && widget.errorText!.isNotEmpty) ...[
-            Gap($styles.insets.xxs),
-            Text(
-              widget.errorText!,
-              style: $styles.text.body.copyWith(color: $styles.colors.danger100),
-            )
-          ]
-        ],
+        ),
       ),
     );
   }

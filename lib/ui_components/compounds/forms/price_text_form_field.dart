@@ -26,7 +26,6 @@ class PriceTextFormInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextInput(
       error: errorText,
-      height: height,
       autoFocus: autoFocus,
       textInputAction: TextInputAction.done,
       hint: 'Price',
