@@ -6,6 +6,7 @@ import 'package:predictiva_task/features/home/domain/models.dart';
 import 'package:predictiva_task/features/home/domain/user_interactor.dart';
 import 'package:predictiva_task/features/home/domain/user_repository.dart';
 import 'package:predictiva_task/features/home/presentation/viewmodels/order_list_view_model.dart';
+import 'package:predictiva_task/features/home/presentation/viewmodels/orders_filter_view_model.dart';
 import 'package:predictiva_task/features/home/presentation/viewmodels/user_portfolio_view_model.dart';
 import 'package:predictiva_task/ui_components/compounds/app_scaffold.dart';
 
@@ -71,4 +72,8 @@ final ordersListViewModel = StateNotifierProvider<OrderListViewModel, XState<Ord
     ref.watch(_userInteractorProvider),
     const XState.initial(),
   )..fetch();
+});
+
+final ordersFilterViewModel = StateNotifierProvider<OrdersFilterViewModel, FilterModel>((ref) {
+  return OrdersFilterViewModel(ref, FilterModel.initial());
 });

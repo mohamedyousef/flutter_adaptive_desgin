@@ -26,11 +26,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "action": MessageLookupByLibrary.simpleMessage("Action"),
         "appName": MessageLookupByLibrary.simpleMessage("Predictiva Task"),
         "badConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage("Bad network connection."),
         "cancelNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage("The request was canceled."),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "forbiddenNetworkErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Access to the resource is forbidden."),
@@ -48,13 +50,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "parsingNetworkErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Error parsing response data."),
         "price": m0,
+        "priceKey": MessageLookupByLibrary.simpleMessage("Price"),
+        "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "serverNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage("Server error."),
         "sometingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong."),
         "subscriptionExpiredMessage": MessageLookupByLibrary.simpleMessage(
             "This subscription expires in a month"),
+        "symbol": MessageLookupByLibrary.simpleMessage("Symbol"),
         "tryAgainButton": MessageLookupByLibrary.simpleMessage("Try Again"),
+        "type": MessageLookupByLibrary.simpleMessage("Type"),
         "unProcessableNetworkErrorMessage":
             MessageLookupByLibrary.simpleMessage(
                 "The server cannot process the request."),

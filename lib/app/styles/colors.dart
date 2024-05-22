@@ -6,6 +6,7 @@ class AppColors {
   final Color grey = const Color(0xFFE1E1E5);
   final Color grey2 = const Color(0xFFB1B1B8);
   final Color grey3 = const Color(0xFFF4F4F5);
+  final Color grey4 = const Color(0xFF9E9EA5);
 
   final Color black20 = const Color(0xFF19191B);
   final Color accent1 = const Color(0xFF00BCAF);
@@ -17,7 +18,6 @@ class AppColors {
   final Color warning = const Color(0xFFE7B500);
   final Color borderColor = const Color(0xFF3E3F48);
 
-  final Color success100 = const Color(0xFF1E1B18);
   final Color success = const Color(0xFF4DAF00);
 
   final bool isDark = true;

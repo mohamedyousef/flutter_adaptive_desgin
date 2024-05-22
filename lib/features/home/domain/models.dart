@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'models.freezed.dart';
 
 @freezed
@@ -19,7 +20,7 @@ class OrderModel with _$OrderModel {
     required String symbol,
     required String type,
     required String side,
-    required String creationTime,
+    required DateTime creationTime,
   }) = _OrderModel;
 }
 
@@ -34,7 +35,7 @@ class OrderList with _$OrderList {
       );
   const OrderList._();
 
-  OrderModel operator [](final int index) => orders[index];
+  OrderModel operator [](int index) => orders[index];
 
   int get length => orders.length;
 
@@ -44,6 +45,17 @@ class OrderList with _$OrderList {
 }
 
 @freezed
-class FilterModel with _$FilterModel {
-  const factory FilterModel() = _FilterModel;
+abstract class FilterModel with _$FilterModel {
+  const factory FilterModel({
+    DateTime? end,
+    DateTime? start,
+    String? symbol,
+    double? price,
+  }) = _FilterModel;
+
+  const FilterModel._();
+
+  factory FilterModel.initial() => const FilterModel();
+
+  bool get isNotEmpty => (start != null && end != null) || (symbol != null && symbol!.isNotEmpty) || price != null;
 }

@@ -10,39 +10,89 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final width = MediaQuery.sizeOf(context).width;
+    final isBiggerInsets = appLogic.shouldUseBiggerInsets(context);
 
     final userPortfolio = ref.watch(_singleUserPortfolioProvider);
-    final verticalPadding = width > 600 ? $styles.insets.md : $styles.insets.md;
-    final horizontalPadding = width > 600 ? $styles.insets.lg : $styles.insets.md;
+    final verticalPadding = isBiggerInsets ? $styles.insets.md : $styles.insets.md;
+    final horizontalPadding = isBiggerInsets ? $styles.insets.lg : $styles.insets.md;
+
+    // todo convert it to component
+    Widget buildPercentageBadge() {
+      return Container(
+        padding: EdgeInsets.all(
+          $styles.insets.xs,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: $styles.colors.success,
+          ),
+          borderRadius: BorderRadius.circular($styles.corners.lg),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              CupertinoIcons.arrow_up_right,
+              color: $styles.colors.success,
+            ),
+            Text(
+              $strings.userPortfolioProfitsPercentageValue(userPortfolio.profitPercentage),
+              style: $styles.text.body.copyWith(
+                color: $styles.colors.success,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     Widget buildSeparator() => Container(
-          width: width < 600 ? double.infinity : 1,
-          height: width < 600 ? 1 : 80,
+          width: !isBiggerInsets ? double.infinity : 1,
+          height: !isBiggerInsets ? 1 : 80,
           color: $styles.colors.borderColor,
         );
     Widget buildSection(
       String title,
-      String value,
-    ) =>
+      String value, {
+      Widget? badge,
+    }) =>
         Align(
           alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: $styles.text.body.copyWith(color: $styles.colors.grey, fontWeight: FontWeight.w400),
-              ),
-              Text(
-                value,
-                style: $styles.text.h5Bold,
-              ),
-            ],
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final bottomWidget = [
+                Text(
+                  value,
+                  style: $styles.text.h5Bold,
+                ),
+                if (badge != null) ...[
+                  Gap($styles.insets.sm),
+                  badge,
+                ],
+              ];
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: $styles.text.body.copyWith(color: $styles.colors.grey, fontWeight: FontWeight.w400),
+                  ),
+                  Gap($styles.insets.xxs),
+                  FittedBox(
+                    child: Row(
+                      children: bottomWidget,
+                    ),
+                  ),
+                  Gap($styles.insets.xs),
+                ],
+              );
+            },
           ),
         );
 
     Widget userPortfolioInfo() {
-      final padding = width < 600 ? $styles.insets.sm : $styles.insets.lg;
+      final padding = isBiggerInsets ? $styles.insets.lg : $styles.insets.sm;
       final sections = [
         Gap(padding),
         Expanded(
@@ -58,8 +108,10 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
           child: buildSection(
             $strings.userPortfolioProfitsTitle,
             $strings.price(userPortfolio.profits),
+            badge: buildPercentageBadge(),
           ),
         ),
+        Gap(padding),
         buildSeparator(),
         Gap(padding),
         Expanded(child: buildSection($strings.userPortfolioAssetsTitle, "${userPortfolio.assets}")),
@@ -80,6 +132,7 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
     Widget buildWarningMessage() {
       return Container(
         decoration: BoxDecoration(
+          color: $styles.colors.black,
           border: Border(
             top: BorderSide(
               color: $styles.colors.borderColor,
@@ -108,10 +161,9 @@ class _UserPortfolioInfoLayout extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: width > 600 ? 0.0 : $styles.insets.sm),
-          color: $styles.colors.black20,
+          padding: EdgeInsets.symmetric(horizontal: isBiggerInsets ? 0.0 : $styles.insets.sm),
           child: SizedBox(
-            height: width < 600 ? 280 : 148,
+            height: !isBiggerInsets ? 300 : 148,
             width: double.infinity,
             child: userPortfolioInfo(),
           ),
@@ -139,6 +191,7 @@ class _UserPortfolioView extends ConsumerWidget {
         border: Border.all(
           color: $styles.colors.borderColor,
         ),
+        color: $styles.colors.black20,
         borderRadius: BorderRadius.circular($styles.corners.md),
       ),
       child: AnimatedSwitcher(

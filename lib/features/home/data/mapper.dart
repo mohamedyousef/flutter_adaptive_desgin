@@ -1,4 +1,3 @@
-import 'package:predictiva_task/app/core/helper/date_formatter.dart';
 import 'package:predictiva_task/common_libs.dart';
 import 'package:predictiva_task/features/home/data/entities.dart';
 import 'package:predictiva_task/features/home/domain/models.dart';
@@ -37,7 +36,7 @@ class UsersMapper {
       symbol: symbol,
       type: type,
       side: side,
-      creationTime: DateFormatter.convertToStringDateFormat(creationTime),
+      creationTime: creationTime,
     );
   }
 }

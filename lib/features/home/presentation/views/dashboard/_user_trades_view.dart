@@ -31,7 +31,9 @@ class _UserTradesView extends ConsumerWidget {
             message: err,
             onRefreshButtonPressed: () => ref.refresh(ordersListViewModel),
           ),
-          data: (data) => _OrdersListView(data.orders),
+          data: (data) {
+            return _OrdersListView(data.orders);
+          },
         ),
       ),
     );
@@ -45,20 +47,23 @@ class _OrdersListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isBigger = appLogic.shouldUseBiggerInsets(context);
+
     return TableView<OrderModel>(
-      onFilterButtonPressed: () {},
+      onFilterButtonPressed: () {
+        showUserTradesFilterDialog(context);
+      },
       items: items,
       itemBuilder: (context, item) => ProviderScope(
         overrides: [_singleOrderModelProvider.overrideWithValue(item)],
         child: isBigger ? const _OrderLandscapeView() : const _OrderPortraitView(),
       ),
       columns: [
-        'Symbol',
-        'Price',
-        'Type',
-        'Action',
-        'Quantity',
-        'Date',
+        $strings.symbol,
+        $strings.priceKey,
+        $strings.type,
+        $strings.action,
+        $strings.quantity,
+        $strings.date,
       ],
       perPage: 5,
     );
@@ -126,7 +131,7 @@ class _OrderLandscapeView extends ConsumerWidget {
           buildSection(orderModel.type),
           buildAction(),
           buildSection('${orderModel.quantity}'),
-          buildSection(orderModel.creationTime),
+          buildSection(orderModel.creationTime.formattedDateString),
         ],
       ),
     );
@@ -172,6 +177,7 @@ class _OrderPortraitView extends ConsumerWidget {
                   $styles.insets.xs,
                 ),
                 decoration: BoxDecoration(
+                  color: $styles.colors.black20,
                   border: Border.all(
                     color: $styles.colors.danger100,
                   ),
@@ -185,7 +191,7 @@ class _OrderPortraitView extends ConsumerWidget {
                 ),
               ),
               Text(
-                orderModel.creationTime,
+                orderModel.creationTime.formattedDateString,
                 style: $styles.text.body.copyWith(
                   color: $styles.colors.grey2,
                   fontWeight: FontWeight.w400,

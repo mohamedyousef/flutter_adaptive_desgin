@@ -1,6 +1,12 @@
 import 'package:predictiva_task/app/core_common_libs.dart'
-    show ResultErrorType, NetworkErrorType, transformErrorMessage;
-import '../../../common_libs.dart' show $styles;
+    show ResultErrorType, NetworkErrorType, transformErrorMessage, DateFormatter;
+import 'package:predictiva_task/common_libs.dart' show $styles;
+
+extension ExtensionDateTime on DateTime {
+  String get formattedDateString {
+    return DateFormatter.convertToStringDateFormat(this);
+  }
+}
 
 extension ExtesnionsScale on num {
   double scale() {

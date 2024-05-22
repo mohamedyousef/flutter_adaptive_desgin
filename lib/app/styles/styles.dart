@@ -2,6 +2,7 @@
 
 import 'package:predictiva_task/app/core/helper/extensions.dart';
 import 'package:predictiva_task/common_libs.dart';
+
 export 'colors.dart';
 
 @immutable
@@ -179,7 +180,7 @@ abstract class TxtInputStyle {
   );
 
   static final _disabledInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: $styles.colors.grey, width: 1),
+    borderSide: BorderSide(color: $styles.colors.borderColor, width: 1),
     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
   );
   static final _focusedInputBorder = OutlineInputBorder(
@@ -188,12 +189,12 @@ abstract class TxtInputStyle {
   );
 
   static final _enabledInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: $styles.colors.grey, width: 1),
+    borderSide: BorderSide(color: $styles.colors.borderColor, width: 1),
     borderRadius: const BorderRadius.all(Radius.circular(8.0)),
   );
 
   static final searchInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: $styles.colors.grey, width: 1),
+    borderSide: BorderSide(color: $styles.colors.borderColor, width: 1),
     borderRadius: const BorderRadius.all(Radius.circular(15.0)),
   );
   static final errorInputBorder = OutlineInputBorder(

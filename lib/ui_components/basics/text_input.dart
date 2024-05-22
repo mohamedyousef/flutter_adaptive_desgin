@@ -158,7 +158,7 @@ class TextInput extends StatelessWidget {
                   ),
                   suffixIconConstraints: const BoxConstraints(minHeight: 5, minWidth: 5),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                  hintStyle: TextStyle(color: $styles.colors.grey),
+                  hintStyle: TextStyle(color: $styles.colors.grey4),
                   hintText: hint,
                   labelText: label,
                   labelStyle: $styles.text.body.copyWith(

@@ -25,5 +25,11 @@
   "userPortfolioBalanceTitle": "Balance",
   "price": "${number}",
   "filter": "Filter",
-  "openTrades": "Open Trades"
+  "openTrades": "Open Trades",
+  "symbol": "Symbol",
+  "priceKey": "Price",
+  "type": "Type",
+  "date": "Date",
+  "quantity": "Quantity",
+  "action": "Action"
 }

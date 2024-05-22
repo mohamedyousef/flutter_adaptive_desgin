@@ -289,6 +289,66 @@ class AppLocalization {
       args: [],
     );
   }
+
+  /// `Symbol`
+  String get symbol {
+    return Intl.message(
+      'Symbol',
+      name: 'symbol',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get priceKey {
+    return Intl.message(
+      'Price',
+      name: 'priceKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message(
+      'Type',
+      name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity`
+  String get quantity {
+    return Intl.message(
+      'Quantity',
+      name: 'quantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Action`
+  String get action {
+    return Intl.message(
+      'Action',
+      name: 'action',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

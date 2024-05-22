@@ -8,7 +8,7 @@ final _tableViewModelProvider = StateNotifierProvider<_TableViewModelNotifier, L
   },
 );
 
-class TableView<T> extends ConsumerWidget {
+class TableView<T> extends ConsumerStatefulWidget {
   final ItemWidgetBuilder<T> itemBuilder;
   final int perPage;
   final List<String> columns;
@@ -25,23 +25,41 @@ class TableView<T> extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _TableViewState<T> createState() => _TableViewState<T>();
+}
+
+class _TableViewState<T> extends ConsumerState<TableView<T>> {
+  @override
+  void didUpdateWidget(covariant TableView<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    Future.microtask(
+      () {
+        if (oldWidget.items != widget.items) {
+          ref.read(_tableViewModelProvider.notifier).initialize(widget.items, widget.perPage, reset: true);
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final model = ref.watch(_tableViewModelProvider.notifier);
 
-    // initialize
     Future.microtask(
-      () => model.initialize(items, perPage),
+      () {
+        model.initialize(widget.items, widget.perPage);
+      },
     );
 
     return Column(
       children: [
         _TableHeader(
-          onFilterButtonPressed: onFilterButtonPressed,
-          columns: columns,
+          onFilterButtonPressed: widget.onFilterButtonPressed,
+          columns: widget.columns,
         ),
         Gap($styles.insets.sm),
-        _TableBody(
-          itemBuilder: itemBuilder,
+        _TableBody<T>(
+          itemBuilder: widget.itemBuilder,
         ),
         const _TableFooter(),
       ],
@@ -69,7 +87,7 @@ class _TableHeader extends StatelessWidget {
           onPressed: onFilterButtonPressed,
           label: width < 600 ? '' : $strings.filter,
           icon: Icon(
-            Icons.filter,
+            Icons.filter_list,
             color: $styles.colors.white,
           ),
         );
@@ -217,8 +235,8 @@ class _TableViewModelNotifier extends StateNotifier<List> {
   int perPage = 1;
   List items = [];
   bool _isInitialized = false;
-  void initialize(List items, int perPage) {
-    if (_isInitialized) return;
+  void initialize(List items, int perPage, {bool reset = false}) {
+    if (_isInitialized && !reset) return;
     this.perPage = perPage;
     this.items = items;
     currentPage = 1;

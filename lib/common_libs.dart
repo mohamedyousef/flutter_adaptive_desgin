@@ -1,5 +1,3 @@
-/// Consolidate imports that are common across the app.
-
 export 'dart:math';
 
 export 'package:collection/collection.dart';

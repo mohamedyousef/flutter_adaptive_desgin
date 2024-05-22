@@ -199,7 +199,7 @@ mixin _$OrderModel {
   String get symbol => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get side => throw _privateConstructorUsedError;
-  String get creationTime => throw _privateConstructorUsedError;
+  DateTime get creationTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderModelCopyWith<OrderModel> get copyWith =>
@@ -218,7 +218,7 @@ abstract class $OrderModelCopyWith<$Res> {
       String symbol,
       String type,
       String side,
-      String creationTime});
+      DateTime creationTime});
 }
 
 /// @nodoc
@@ -265,7 +265,7 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
       creationTime: null == creationTime
           ? _value.creationTime
           : creationTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -284,7 +284,7 @@ abstract class _$$OrderModelImplCopyWith<$Res>
       String symbol,
       String type,
       String side,
-      String creationTime});
+      DateTime creationTime});
 }
 
 /// @nodoc
@@ -329,7 +329,7 @@ class __$$OrderModelImplCopyWithImpl<$Res>
       creationTime: null == creationTime
           ? _value.creationTime
           : creationTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -356,7 +356,7 @@ class _$OrderModelImpl implements _OrderModel {
   @override
   final String side;
   @override
-  final String creationTime;
+  final DateTime creationTime;
 
   @override
   String toString() {
@@ -396,7 +396,7 @@ abstract class _OrderModel implements OrderModel {
       required final String symbol,
       required final String type,
       required final String side,
-      required final String creationTime}) = _$OrderModelImpl;
+      required final DateTime creationTime}) = _$OrderModelImpl;
 
   @override
   double get quantity;
@@ -409,7 +409,7 @@ abstract class _OrderModel implements OrderModel {
   @override
   String get side;
   @override
-  String get creationTime;
+  DateTime get creationTime;
   @override
   @JsonKey(ignore: true)
   _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
@@ -543,13 +543,24 @@ abstract class _OrdersList extends OrderList {
 }
 
 /// @nodoc
-mixin _$FilterModel {}
+mixin _$FilterModel {
+  DateTime? get end => throw _privateConstructorUsedError;
+  DateTime? get start => throw _privateConstructorUsedError;
+  String? get symbol => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $FilterModelCopyWith<FilterModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $FilterModelCopyWith<$Res> {
   factory $FilterModelCopyWith(
           FilterModel value, $Res Function(FilterModel) then) =
       _$FilterModelCopyWithImpl<$Res, FilterModel>;
+  @useResult
+  $Res call({DateTime? end, DateTime? start, String? symbol, double? price});
 }
 
 /// @nodoc
@@ -561,13 +572,45 @@ class _$FilterModelCopyWithImpl<$Res, $Val extends FilterModel>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? end = freezed,
+    Object? start = freezed,
+    Object? symbol = freezed,
+    Object? price = freezed,
+  }) {
+    return _then(_value.copyWith(
+      end: freezed == end
+          ? _value.end
+          : end // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      start: freezed == start
+          ? _value.start
+          : start // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      symbol: freezed == symbol
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
+              as String?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$FilterModelImplCopyWith<$Res> {
+abstract class _$$FilterModelImplCopyWith<$Res>
+    implements $FilterModelCopyWith<$Res> {
   factory _$$FilterModelImplCopyWith(
           _$FilterModelImpl value, $Res Function(_$FilterModelImpl) then) =
       __$$FilterModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DateTime? end, DateTime? start, String? symbol, double? price});
 }
 
 /// @nodoc
@@ -577,28 +620,95 @@ class __$$FilterModelImplCopyWithImpl<$Res>
   __$$FilterModelImplCopyWithImpl(
       _$FilterModelImpl _value, $Res Function(_$FilterModelImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? end = freezed,
+    Object? start = freezed,
+    Object? symbol = freezed,
+    Object? price = freezed,
+  }) {
+    return _then(_$FilterModelImpl(
+      end: freezed == end
+          ? _value.end
+          : end // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      start: freezed == start
+          ? _value.start
+          : start // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      symbol: freezed == symbol
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
+              as String?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$FilterModelImpl implements _FilterModel {
-  const _$FilterModelImpl();
+class _$FilterModelImpl extends _FilterModel {
+  const _$FilterModelImpl({this.end, this.start, this.symbol, this.price})
+      : super._();
+
+  @override
+  final DateTime? end;
+  @override
+  final DateTime? start;
+  @override
+  final String? symbol;
+  @override
+  final double? price;
 
   @override
   String toString() {
-    return 'FilterModel()';
+    return 'FilterModel(end: $end, start: $start, symbol: $symbol, price: $price)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FilterModelImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FilterModelImpl &&
+            (identical(other.end, end) || other.end == end) &&
+            (identical(other.start, start) || other.start == start) &&
+            (identical(other.symbol, symbol) || other.symbol == symbol) &&
+            (identical(other.price, price) || other.price == price));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, end, start, symbol, price);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FilterModelImplCopyWith<_$FilterModelImpl> get copyWith =>
+      __$$FilterModelImplCopyWithImpl<_$FilterModelImpl>(this, _$identity);
 }
 
-abstract class _FilterModel implements FilterModel {
-  const factory _FilterModel() = _$FilterModelImpl;
+abstract class _FilterModel extends FilterModel {
+  const factory _FilterModel(
+      {final DateTime? end,
+      final DateTime? start,
+      final String? symbol,
+      final double? price}) = _$FilterModelImpl;
+  const _FilterModel._() : super._();
+
+  @override
+  DateTime? get end;
+  @override
+  DateTime? get start;
+  @override
+  String? get symbol;
+  @override
+  double? get price;
+  @override
+  @JsonKey(ignore: true)
+  _$$FilterModelImplCopyWith<_$FilterModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
